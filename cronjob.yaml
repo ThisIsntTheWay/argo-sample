@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: random-failure-cronjob
+  namespace: default
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Allow
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: busybox
+            image: busybox:latest
+            command:
+            - sh
+            - -c
+            - sleep 120 && exit $((RANDOM % 2))
+          restartPolicy: OnFailure
