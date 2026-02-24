@@ -4,6 +4,7 @@ metadata:
   name: random-failure-cronjob
   namespace: default
 spec:
+  suspend: true
   schedule: "*/5 * * * *"
   concurrencyPolicy: Allow
   successfulJobsHistoryLimit: 3
