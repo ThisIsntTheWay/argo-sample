@@ -19,5 +19,10 @@ spec:
             command:
             - sh
             - -c
-            - echo "i am sleepy zzzzzz"; sleep 120 && exit $((RANDOM % 2))
+            - |
+              export e=$((RANDOM % 2))
+              echo i am sleepy zzzzzz
+              sleep 10
+              echo "and now I die :( (exit: $e)"
+              exit $e
           restartPolicy: OnFailure
